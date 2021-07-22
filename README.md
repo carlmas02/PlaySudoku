@@ -1,3 +1,3 @@
-# Sudoku game using tkinter framework in Python
+# Sudoku game using tkinter framework in Python !
 
 ## Algorithm used : Backtracking
