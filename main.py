@@ -84,3 +84,4 @@ button1.configure(command = set_difficulty)
 root.mainloop()
 
 
+print("hey")
