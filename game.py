@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox as tmsg
 import solver
 import time 
-import pyautogui
+
 
 
 root = Tk()
@@ -86,10 +86,10 @@ def check_if_won():
 
 	if flag == 1:
 		tmsg.showerror("ERROR")
-	if flag == 2:
+	elif flag == 2:
 		tmsg.showerror("Error","You shall submit after filling every entry !")
 	else :
-		tmsg.showinfo("WINNNNN")
+		tmsg.showinfo("WIN")
 
 
 def restart_game():
@@ -99,7 +99,6 @@ def restart_game():
 	count = 0
 	for i in range(9):
 		for j in range(9):
-			print("yo")
 			if entry_list[count]['state'] != 'disabled':
 				entry_list[count].delete(0,"end")
 			count+=1
