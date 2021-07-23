@@ -35,11 +35,9 @@ example_board= [[-1,-1,-1,-1,-1,-1,-1,-1,-1],
 				[-1,-1,-1,-1,-1,-1,-1,-1,-1],]
 
 
-print(api_board['squares'])
+#print(api_board['squares'])
 for option in api_board['squares']:
 	example_board[ option["x"] ][ option["y"] ] = option['value'] 
-
-#example_board = solver.example_board
 
 entry_list = []
 
@@ -47,7 +45,6 @@ entry_list = []
 VALX_ = 0.063
 VALY_ = 0.154
 ###############
-
 
 
 def callback( P):
