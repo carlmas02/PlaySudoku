@@ -21,8 +21,13 @@ label1.place(relx=0, rely=0, width=700, height=700)
 
 #api call
 
-api_board = requests.get("http://www.cs.utep.edu/cheon/ws/sudoku/new/?size=9/&level=2")
-api_board = api_board.json()
+try :
+	api_board = requests.get("http://www.cs.utep.edu/cheon/ws/sudoku/new/?size=9/&level=2")
+	api_board = api_board.json()
+except:
+	tmsg.showerror("Error","No Internet Connection !")
+	root.destroy()
+
 
 example_board= [[-1,-1,-1,-1,-1,-1,-1,-1,-1],
 				[-1,-1,-1,-1,-1,-1,-1,-1,-1],
