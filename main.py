@@ -1,12 +1,10 @@
 from tkinter import *
 import os
  
-
 root = Tk()
 root.geometry("700x700+380+70")
-
-
-
+ 
+ 
 def set_difficulty():
 	new = Toplevel()
 	new.geometry("500x250+460+200")
@@ -82,6 +80,3 @@ button1.configure(command = set_difficulty)
 
 
 root.mainloop()
-
-
-print("hey")

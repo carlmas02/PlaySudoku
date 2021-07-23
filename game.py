@@ -2,12 +2,11 @@ from tkinter import *
 from tkinter import messagebox as tmsg
 import solver
 import time 
-
+import requests
 
 
 root = Tk()
 root.geometry("700x700+380+70")
-
 
 ############### IMAGES
 bgimg = PhotoImage(file = "/Users//Carl//Desktop//PlaySudoku//Images//board.png")
@@ -20,7 +19,27 @@ label1 = Label(root,image = bgimg)
 label1.place(relx=0, rely=0, width=700, height=700)
 
 
-example_board = solver.example_board
+#api call
+
+api_board = requests.get("http://www.cs.utep.edu/cheon/ws/sudoku/new/?size=9/&level=2")
+api_board = api_board.json()
+
+example_board= [[-1,-1,-1,-1,-1,-1,-1,-1,-1],
+				[-1,-1,-1,-1,-1,-1,-1,-1,-1],
+				[-1,-1,-1,-1,-1,-1,-1,-1,-1],
+				[-1,-1,-1,-1,-1,-1,-1,-1,-1],
+				[-1,-1,-1,-1,-1,-1,-1,-1,-1],
+				[-1,-1,-1,-1,-1,-1,-1,-1,-1],
+				[-1,-1,-1,-1,-1,-1,-1,-1,-1],
+				[-1,-1,-1,-1,-1,-1,-1,-1,-1],
+				[-1,-1,-1,-1,-1,-1,-1,-1,-1],]
+
+
+print(api_board['squares'])
+for option in api_board['squares']:
+	example_board[ option["x"] ][ option["y"] ] = option['value'] 
+
+#example_board = solver.example_board
 
 entry_list = []
 
@@ -60,7 +79,6 @@ for i in range(9):
 			entry_list[count].insert(0,str(example_board[i][j]))
 			entry_list[count].config(state='disabled',disabledbackground="cyan",disabledforeground="black")
 		count+=1
-
 
 
 def check_if_won():
@@ -104,24 +122,6 @@ def restart_game():
 			count+=1
 
 
-def give_hint():
-	count = 0
-	for i in range(0,9):
-		for j in range(0,9):
-			if entry_list[count]['state'] != 'disabled':
-				try :
-					print(i,j,entry_list[count].get())
-					#example_board[i][j] = int(entry_list[count].get())
-				except ValueError:
-					pass
-
-		count+=1
-	print(example_board)
-
-
-
-
-
 submit_ = Button(root,command = check_if_won,image = submit)
 submit_.place(relx=0.2, rely=0.8,width=160, height=80)
 submit_.configure(relief="flat")
@@ -138,46 +138,4 @@ restart.configure(activebackground="#ffde59")
 restart.configure(cursor="hand2")
 restart.configure(borderwidth="0")
 
-
-hint_button = Button(root,command = give_hint)
-hint_button.place(relx=0.65, rely=0.4,width=160, height=80)
-hint_button.configure(relief="flat")
-hint_button.configure(overrelief="flat")
-hint_button.configure(activebackground="#ffde59")
-hint_button.configure(cursor="hand2")
-hint_button.configure(borderwidth="0")
-
-
-
 root.mainloop()
-
-
-
-
-############################################################################
-
-# var = Entry(root,font=50)
-# var.place(relx=0.063, rely=0.454, width=40, height=38)
-
-
-
-# test2 = Entry(root)
-# test2.place(relx=0.126, rely=0.154, width=40, height=38)
-
-
-def tryi():
-	solved_version = solver.solve_for_game()
-	count  = 0
-	for i in range(9):
-		for j in range(9):
-			entry_list[count].config(state='normal')
-			print(example_board[i][j],entry_list[count])
-			if example_board[i][j] != -1:
-				entry_list[count].insert(0,str(example_board[i][j]))
-				
-			count+=1
-
-
-
-# my2 = Button(root,command = tryi)
-# my2.place(relx=0, rely=0.5)
